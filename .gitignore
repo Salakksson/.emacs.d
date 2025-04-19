@@ -1,0 +1,11 @@
+*
+
+!init.el
+!.gitignore
+!README.md
+!LICENCE
+
+!lisp/
+!lisp/**
+!themes/
+!themes/**
