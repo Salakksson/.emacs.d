@@ -19,3 +19,32 @@
 
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c d") 'dired-jump)
+(global-set-key (kbd "C-c e") 'eval-buffer)
+
+(defun reload-init-file ()
+	(interactive)
+	(setq load-path (copy-sequence initial-load-path))
+	(setq exec-path (copy-sequence initial-exec-path))
+	(load-file user-init-file))
+
+(global-set-key (kbd "C-c R") #'reload-init-file)
+
+(defun conf-dir ()
+  "open .config in dired"
+  (interactive)
+  (dired "~/.config/")
+)
+
+(defun proj-dir ()
+  "open projects in dired"
+  (interactive)
+  (dired "~/code/")
+)
+
+(defun init-el ()
+  "open init.el"
+  (interactive)
+  (find-file "~/.config/emacs/init.el")
+)
+
+

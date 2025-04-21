@@ -16,6 +16,8 @@
 (setq inhibit-splash-screen t)
 (setq ring-bell-function 'ignore)
 
-(global-flex-autopair-mode 1)
+;; (global-flex-autopair-mode 0)
+(electric-pair-mode 1)
+
 
 (provide 'qol)
