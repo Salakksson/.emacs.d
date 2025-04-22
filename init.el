@@ -49,5 +49,10 @@
   (find-file "~/.config/emacs/init.el")
 )
 
+(defun todo ()
+  "open todo"
+  (interactive)
+  (find-file "/h/todo")
+  ;; (add-hook 'after-save-hook (lambda () (kill-this-buffer)) nil t)
+)
 
-(put 'upcase-region 'disabled nil)
