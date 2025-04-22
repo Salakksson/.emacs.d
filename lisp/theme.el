@@ -6,7 +6,10 @@
 (add-to-list 'default-frame-alist '(alpha-background . 80))
 
 ;; Font
-(set-frame-font "Victor Mono Nerd Font-18")
+(set-face-attribute 'default nil
+	:family "Victor Mono Nerd Font"
+	:height 180
+	:weight 'semi-bold)
 
 ;; Cursor
 (setq-default cursor-type 'bar)

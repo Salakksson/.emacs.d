@@ -1,8 +1,10 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(require 'package)
+(setq custom-safe-themes t)
+(require 'theme) ;; most pressing issue which should be dealt with first
+
 (require 'remove-bullshit)
-(require 'theme)
+(require 'package-manager)
 (require 'qol)
 (require 'tabs)
 
@@ -48,3 +50,4 @@
 )
 
 
+(put 'upcase-region 'disabled nil)
