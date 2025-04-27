@@ -64,6 +64,10 @@
 	 `(tab-bar-tab-inactive ((,class (:background "#1f202e" :foreground ,br-white))))
 	 `(tab-bar-tab-selected ((,class (:background ,br-blue :foreground ,fg))))
 	 `(tab-bar-tab-inactive-selected ((,class (:background ,br-black :foreground ,fg))))
+
+	 `(whitespace-space ((,class (:foreground "#5c5c66" :background ,bg))))
+	 `(whitespace-tab ((,class (:foreground "#5c5c66" :background ,bg))))
+	 `(whitespace-trailing ((,class (:foreground "#ff6c6b" :background ,bg :underline t))))
 	 
 	)
 )

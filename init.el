@@ -7,6 +7,7 @@
 (require 'package-manager)
 (require 'qol)
 (require 'tabs)
+(require 'term)
 
 ;; C settings
 (require 'cc-mode)
@@ -16,6 +17,18 @@
 (c-set-offset 'case-label '+)
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 8)
+
+(setq lsp-lens-enable nil)
+(setq lsp-headerline-breadcrumb-enable nil)
+
+;; Shell settings
+(add-hook 'sh-mode-hook
+	(lambda ()
+		(setq tab-width 8)
+		(setq indent-tabs-mode t)
+		(setq sh-basic-offset 8)
+	)
+)
 
 (setq whitespace-style (list 'tabs 'spaces 'space-before-tab 'space-after-tab 'space-mark 'tab-mark))
 
@@ -29,12 +42,12 @@
 	(setq exec-path (copy-sequence initial-exec-path))
 	(load-file user-init-file))
 
-(global-set-key (kbd "C-c R") #'reload-init-file)
+(global-set-key (kbd "C-c r") #'reload-init-file)
 
 (defun conf-dir ()
   "open .config in dired"
   (interactive)
-  (dired "~/.config/")
+  (dired "~/dotfiles/.config/")
 )
 
 (defun proj-dir ()
@@ -52,7 +65,11 @@
 (defun todo ()
   "open todo"
   (interactive)
-  (find-file "/h/todo")
-  ;; (add-hook 'after-save-hook (lambda () (kill-this-buffer)) nil t)
+  (find-file "/h/todo.org")
 )
 
+(defun reload-conf ()
+  "reload config"
+  (interactive)
+  (load "~/.config/emacs/init.el")
+)

@@ -1,35 +1,60 @@
-;; Add melpa to package manager
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; List of packages
-(setq my/packages
-      '(ligature smex restart-emacs multiple-cursors magit ido-completing-read+
-        ))
+(eval-when-compile
+  (require 'use-package))
 
-;; Fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
+(use-package magit
+  :ensure t
+  :commands (magit-status magit-log-all)
+  :defer t)
 
-;; Install the missing packages
-(dolist (package my/packages)
-  (unless (package-installed-p package)
-    (package-install package)))
+(use-package multiple-cursors
+  :ensure t
+  :commands (mc/edit-lines mc/mark-all-dwim)
+  :defer t)
 
-(defun my/is-package-a-dependency (test-package)
-  "Returns if a package is a dependency of another package or not"
-  (catch 'is-dep
-    (dolist (package my/packages)
-      (let ((deps (package--dependencies package)))
-        (if (member test-package deps)
-            (throw 'is-dep t))))))
+(use-package vterm
+  :ensure t
+  :commands (vterm vterm-other-window)
+  :defer t)
 
-;; Uninstall removed packages
-(dolist (package package-activated-list)
-  (if (and (package-installed-p package) (not (member package my/packages)) (not (my/is-package-a-dependency package)))
-      (let ((package-desc (package-get-descriptor package)))
-        (package-delete package-desc))))
+(use-package company
+  :ensure t
+  :hook (after-init . global-company-mode)
+  :defer t)
+
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  :hook ((python-mode . lsp)
+         (c-mode . lsp)
+         (cpp-mode . lsp)))
+
+(use-package flycheck
+  :ensure t
+  :defer t
+  :hook (lsp-mode . flycheck-mode))
+
+(use-package lsp-ui
+  :ensure t
+  :after lsp-mode
+  :defer t)
+
+(use-package smex
+  :ensure t
+  :commands smex
+  :defer t)
+
+(use-package ido-completing-read+
+  :ensure t
+  :defer t)
+
+(use-package indent-guide
+  :ensure t
+  :commands indent-guide-mode
+  :defer t)
+
 
 (provide 'package-manager)
