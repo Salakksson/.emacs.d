@@ -1,3 +1,11 @@
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -45,11 +53,17 @@
 (use-package smex
   :ensure t
   :commands smex
-  :defer t)
+  :init
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+)
 
 (use-package ido-completing-read+
   :ensure t
-  :defer t)
+  :init
+  (ido-mode t)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1))
 
 (use-package indent-guide
   :ensure t
