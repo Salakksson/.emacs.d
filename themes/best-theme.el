@@ -2,12 +2,12 @@
 
 (let
 	(
-	 (class '((class color) (min-colors 89)))
-
 	 ;; Primary
-	 (fg "#c0caf5")
-	 (bg "#1a1b26")
-
+	 (fg   "#c0caf5")
+	 (bg   "#1a1b26")
+	 (bg+1 "#2a2b37")
+	 (bg+2 "#353644")
+	 
 	 ;; Normal
 	 (black "#15161E")
 	 (red "#f7768e")
@@ -36,40 +36,57 @@
 	 'best
 	 
 	 ;; Basic
-	 `(default ((,class (:foreground ,fg :background ,bg))))
-	 `(cursor ((,class (:background ,fg))))
-	 `(region ((,class (:background ,br-black))))
-	 `(highlight ((,class (:background ,br-black))))
-	 `(minibuffer-prompt ((,class (:foreground ,blue :bold t))))
-	 `(vertical-border ((,class (:foreground ,black))))
+	 `(default ((t ,(list :foreground fg :background bg))))
+	 `(cursor ((t ,(list :background fg))))
+	 `(region ((t ,(list :background br-black))))
+	 `(highlight ((t ,(list :background br-black))))
+	 `(minibuffer-prompt ((t ,(list :foreground blue :bold t))))
+	 `(vertical-border ((t ,(list :foreground black))))
 
 	 ;; Font-lock
-	 `(font-lock-builtin-face ((,class (:foreground ,magenta))))
-	 `(font-lock-comment-face ((,class (:foreground ,br-black))))
-	 `(font-lock-constant-face ((,class (:foreground ,cyan))))
-	 `(font-lock-function-name-face ((,class (:foreground ,blue))))
-	 `(font-lock-keyword-face ((,class (:foreground ,red))))
-	 `(font-lock-string-face ((,class (:foreground ,green))))
-	 `(font-lock-type-face ((,class (:foreground ,yellow))))
-	 `(font-lock-variable-name-face ((,class (:foreground ,white))))
-	 `(font-lock-warning-face ((,class (:foreground ,color-17 :bold t))))
+	 `(font-lock-builtin-face ((t ,(list :foreground magenta))))
+	 `(font-lock-comment-face ((t ,(list :foreground br-black))))
+	 `(font-lock-constant-face ((t ,(list :foreground cyan))))
+	 `(font-lock-function-name-face ((t ,(list :foreground blue))))
+	 `(font-lock-keyword-face ((t ,(list :foreground red))))
+	 `(font-lock-string-face ((t ,(list :foreground green))))
+	 `(font-lock-type-face ((t ,(list :foreground yellow))))
+	 `(font-lock-variable-name-face ((t ,(list :foreground white))))
+	 `(font-lock-warning-face ((t ,(list :foreground color-17 :bold t))))
 
 	 `(mode-line ((t ,(list :background "#2a2b37"
 				:foreground "#eeeeee"))))
 	 `(mode-line-inactive ((t ,(list :background "#1f202e"
 					 :foreground "#eeeeee"))))
 	 ;; Tab Bar Mode
-	 `(tab-bar ((,class (:background ,bg :foreground ,fg))))
-	 `(tab-bar-tab ((,class (:background "#2a2b37" :foreground ,fg :bold t))))
-	 `(tab-bar-tab-inactive ((,class (:background "#1f202e" :foreground ,br-white))))
-	 `(tab-bar-tab-selected ((,class (:background ,br-blue :foreground ,fg))))
-	 `(tab-bar-tab-inactive-selected ((,class (:background ,br-black :foreground ,fg))))
+	 `(tab-bar ((t ,(list :background bg :foreground fg))))
+	 `(tab-bar-tab ((t ,(list :background "#2a2b37" :foreground fg :bold t))))
+	 `(tab-bar-tab-inactive ((t ,(list :background "#1f202e" :foreground br-white))))
+	 `(tab-bar-tab-selected ((t ,(list :background br-blue :foreground fg))))
+	 `(tab-bar-tab-inactive-selected ((t ,(list :background br-black :foreground fg))))
 
-	 `(whitespace-space ((,class (:foreground "#5c5c66" :background ,bg))))
-	 `(whitespace-tab ((,class (:foreground "#5c5c66" :background ,bg))))
-	 `(whitespace-trailing ((,class (:foreground "#ff6c6b" :background ,bg :underline t))))
-	 
-	)
+	 `(whitespace-space ((t ,(list :background bg
+				       :foreground bg+1))))
+	 `(whitespace-tab ((t ,(list :background bg
+				     :foreground bg+1))))
+	 `(whitespace-hspace ((t ,(list :background bg
+					:foreground bg+2))))
+	 `(whitespace-line ((t ,(list :background bg+2
+				      :foreground red))))
+	 `(whitespace-newline ((t ,(list :background bg
+					 :foreground bg+2))))
+	 `(whitespace-trailing ((t ,(list :background red
+					  :foreground red))))
+	 `(whitespace-empty ((t ,(list :background yellow
+				       :foreground yellow))))
+	 `(whitespace-indentation ((t ,(list :background yellow
+					     :foreground red))))
+	 `(whitespace-space-after-tab ((t ,(list :background yellow
+						 :foreground yellow))))
+	 `(whitespace-space-before-tab ((t ,(list :background red
+						  :foreground ))))
+
+	 )
 )
 
 (provide 'best)

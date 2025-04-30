@@ -1,4 +1,6 @@
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+
+(setq whitespace-style (list 'tabs 'spaces 'space-before-tab 'space-after-tab 'space-mark 'tab-mark))
 (load-theme 'best)
 
 ;; Transparency

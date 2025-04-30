@@ -30,8 +30,6 @@
 	)
 )
 
-(setq whitespace-style (list 'tabs 'spaces 'space-before-tab 'space-after-tab 'space-mark 'tab-mark))
-
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c d") 'dired-jump)
 (global-set-key (kbd "C-c e") 'eval-buffer)

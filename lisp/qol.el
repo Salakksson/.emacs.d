@@ -9,7 +9,6 @@
 (setq backward-delete-char-untabify-method nil)
 
 ;; (indent-guide-global-mode)
-
 ;; (setq indent-guide-recursive t)
 ;; (setq indent-guide-delay 0)
 
