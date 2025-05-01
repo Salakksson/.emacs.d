@@ -45,13 +45,13 @@
 (defun conf-dir ()
   "open .config in dired"
   (interactive)
-  (dired "~/dotfiles/.config/")
+  (dired "~/dots/.config/")
 )
 
 (defun proj-dir ()
   "open projects in dired"
   (interactive)
-  (dired "~/code/")
+  (dired "/h/code/")
 )
 
 (defun init-el ()
@@ -64,6 +64,12 @@
   "open todo"
   (interactive)
   (find-file "/h/todo.org")
+)
+
+(defun pamde ()
+  "open pamde file"
+  (interactive)
+  (find-file "/usr/local/share/pamde/main.conf")
 )
 
 (defun reload-conf ()

@@ -1,7 +1,9 @@
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
 
-(setq whitespace-style (list 'tabs 'spaces 'space-before-tab 'space-after-tab 'space-mark 'tab-mark))
+(setq whitespace-style '(face tabs spaces trailing space-before-tab space-after-tab tab-mark space-mark))
 (load-theme 'best)
+
+(global-whitespace-mode)
 
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 80)
