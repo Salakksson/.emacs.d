@@ -84,6 +84,15 @@
 	 `(whitespace-space-before-tab ((t ,(list :background red
 						  :foreground bg))))
 
+	 `(vterm-color-default ((t (:foreground nil :background nil :inherit default))))
+         `(vterm-color-black   ((t (:foreground ,black :background ,black))))
+         `(vterm-color-blue    ((t (:foreground ,blue :background ,blue))))
+         `(vterm-color-cyan    ((t (:foreground ,cyan :background ,cyan))))
+         `(vterm-color-green   ((t (:foreground ,green :background ,green))))
+         `(vterm-color-magenta ((t (:foreground ,magenta :background ,magenta))))
+         `(vterm-color-red     ((t (:foreground ,red :background ,red))))
+         `(vterm-color-white   ((t (:foreground ,fg :background ,fg))))
+         `(vterm-color-yellow  ((t (:foreground ,yellow :background ,yellow))))
 
 	 )
 )

@@ -33,12 +33,24 @@
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c d") 'dired-jump)
 (global-set-key (kbd "C-c e") 'eval-buffer)
+(global-set-key (kbd "C-c t") 'vterm)
+
+(defun my/confirm-exit ()
+	(interactive)
+	(when (y-or-n-p "Really quit Emacs? ")
+	  (save-buffers-kill-terminal)
+	)
+)
+
+(global-set-key (kbd "C-x C-c") 'my/confirm-exit)
+
 
 (defun reload-init-file ()
 	(interactive)
 	(setq load-path (copy-sequence initial-load-path))
 	(setq exec-path (copy-sequence initial-exec-path))
-	(load-file user-init-file))
+	(load-file user-init-file)
+)
 
 (global-set-key (kbd "C-c r") #'reload-init-file)
 
@@ -76,4 +88,10 @@
   "reload config"
   (interactive)
   (load "~/.config/emacs/init.el")
+)
+
+(defun bigrat ()
+  "bigrat"
+  (interactive)
+  (find-file "/h/bigrat.jpg")
 )
