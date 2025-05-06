@@ -33,7 +33,12 @@
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c d") 'dired-jump)
 (global-set-key (kbd "C-c e") 'eval-buffer)
-(global-set-key (kbd "C-c t") 'vterm)
+(global-set-key (kbd "C-c t")
+                (lambda ()
+                  (interactive)
+                  (vterm)
+                  (rename-buffer (generate-new-buffer-name "*vterm*"))))
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (defun my/confirm-exit ()
 	(interactive)
