@@ -71,6 +71,18 @@
   (dired "/h/code/")
 )
 
+(defun git-dir ()
+  "open git dir in dired"
+  (interactive)
+  (dired "/h/git/")
+)
+
+(defun home-dir ()
+  "open /h in dired"
+  (interactive)
+  (dired "/h/")
+)
+
 (defun init-el ()
   "open init.el"
   (interactive)
