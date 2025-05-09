@@ -12,7 +12,7 @@
 ;; C settings
 (require 'cc-mode)
 (setq c-basic-offset 8)
-(add-to-list 'c-default-style '(c-mode . "k&r"))
+(add-to-list 'c-default-style '(c-mode . "bsd"))
 (c-set-offset 'arglist-close 0)
 (c-set-offset 'case-label '+)
 (setq-default indent-tabs-mode t)
@@ -100,3 +100,14 @@
   (interactive)
   (find-file "/h/bigrat.jpg")
 )
+
+(defun sudo-this-file ()
+  "sudo"
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if filename
+        (let ((new-filename (concat "/sudo::" filename)))
+          (set-visited-file-name new-filename t)
+          (revert-buffer t t t))
+      (message "This buffer is not visiting a file"))))
+
