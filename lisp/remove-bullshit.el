@@ -8,6 +8,9 @@
 (setq auto-save-file-name-transforms `((".*" "~/.cache/emacs/tmp-files/" t)))
 (setq lock-file-name-transforms `((".*" "~/.cache/emacs/tmp-files/" t)))
 
+;; Default compile command
+(setq compile-command "cd .. && source ./build.sh && $TARGET")
+
 ;; Default shit
 (fringe-mode 0)
 (menu-bar-mode 0)
