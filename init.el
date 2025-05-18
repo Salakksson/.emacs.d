@@ -9,14 +9,18 @@
 (require 'tabs)
 (require 'term)
 
-;; C settings
 (require 'cc-mode)
-(setq c-basic-offset 8)
-(add-to-list 'c-default-style '(c-mode . "bsd"))
-(c-set-offset 'arglist-close 0)
-(c-set-offset 'case-label '+)
-(setq-default indent-tabs-mode t)
-(setq-default tab-width 8)
+
+(defun my-c-style ()
+    (c-set-style "bsd")
+    (setq c-basic-offset 8)
+    (c-set-offset 'arglist-close 0)
+    (c-set-offset 'case-label 0)
+    (setq indent-tabs-mode t)
+    (setq tab-width 8)
+)
+
+(add-hook 'c-mode-common-hook 'my-c-style)
 
 (setq lsp-lens-enable nil)
 (setq lsp-headerline-breadcrumb-enable nil)
@@ -31,6 +35,7 @@
 )
 
 (global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c r") 'recompile)
 (global-set-key (kbd "C-c d") 'dired-jump)
 (global-set-key (kbd "C-c e") 'eval-buffer)
 (global-set-key (kbd "C-c t")

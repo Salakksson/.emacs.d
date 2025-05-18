@@ -9,7 +9,7 @@
 (setq lock-file-name-transforms `((".*" "~/.cache/emacs/tmp-files/" t)))
 
 ;; Default compile command
-(setq compile-command "cd .. && source ./build.sh && $TARGET")
+(setq compile-command "cd .. && ./build.sh")
 
 ;; Default shit
 (fringe-mode 0)
