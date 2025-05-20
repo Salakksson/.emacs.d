@@ -9,40 +9,20 @@
 (require 'tabs)
 (require 'term)
 
-(require 'cc-mode)
+(require 'modes)
 
-(defun my-c-style ()
-    (c-set-style "bsd")
-    (setq c-basic-offset 8)
-    (c-set-offset 'arglist-close 0)
-    (c-set-offset 'case-label 0)
-    (setq indent-tabs-mode t)
-    (setq tab-width 8)
+(defun my-vterm ()
+  (interactive)
+  (vterm)
+  (rename-buffer (generate-new-buffer-name "*vterm*"))
 )
 
-(add-hook 'c-mode-common-hook 'my-c-style)
-
-(setq lsp-lens-enable nil)
-(setq lsp-headerline-breadcrumb-enable nil)
-
-;; Shell settings
-(add-hook 'sh-mode-hook
-	(lambda ()
-		(setq tab-width 8)
-		(setq indent-tabs-mode t)
-		(setq sh-basic-offset 8)
-	)
-)
-
+(global-set-key (kbd "C-c t") 'my-vterm)
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c r") 'recompile)
 (global-set-key (kbd "C-c d") 'dired-jump)
 (global-set-key (kbd "C-c e") 'eval-buffer)
-(global-set-key (kbd "C-c t")
-                (lambda ()
-                  (interactive)
-                  (vterm)
-                  (rename-buffer (generate-new-buffer-name "*vterm*"))))
+
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 (defun my/confirm-exit ()
@@ -53,16 +33,6 @@
 )
 
 (global-set-key (kbd "C-x C-c") 'my/confirm-exit)
-
-
-(defun reload-init-file ()
-	(interactive)
-	(setq load-path (copy-sequence initial-load-path))
-	(setq exec-path (copy-sequence initial-exec-path))
-	(load-file user-init-file)
-)
-
-(global-set-key (kbd "C-c r") #'reload-init-file)
 
 (defun conf-dir ()
   "open .config in dired"
