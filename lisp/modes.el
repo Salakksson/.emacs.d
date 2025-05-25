@@ -34,13 +34,24 @@
 
 (add-hook 'sh-mode-hook 'my-shell-mode)
 
+;; Webmode only has 6 indent width since html is highly indented
 (defun my-web-mode ()
   (setq tab-width 8)
   (setq indent-tabs-mode t)
+
+  (setq web-mode-markup-indent-offset 8)
+  (setq web-mode-code-indent-offset 8)
+  (setq web-mode-css-indent-offset 8)
+
   (yas-activate-extra-mode 'html-mode)
 )
 
+(defun goto-webmode () (setq web-mode t))
+
 (add-hook 'web-mode-hook 'my-web-mode)
+(add-hook 'javascript-mode-hook 'goto-webmode)
+(add-hook 'html-mode-hook 'goto-webmode)
+(add-hook 'css-mode-hook 'goto-webmode)
 
 (with-eval-after-load 'yasnippet
    (define-key yas-minor-mode-map (kbd "TAB") nil)
