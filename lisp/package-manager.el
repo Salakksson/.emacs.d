@@ -44,15 +44,6 @@
   :defer t
 )
 
-(use-package lsp-mode
-  :ensure t
-  :defer t
-  :hook ((python-mode . lsp)
-         (c-mode . lsp)
-         (cpp-mode . lsp)
-  )
-)
-
 (use-package flycheck
   :ensure t
   :defer t
@@ -95,5 +86,22 @@
 
 (use-package yasnippet-snippets
    :ensure t)
+
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  :hook ((python-mode . lsp)
+         (c-mode . lsp)
+         (c++-mode . lsp))
+  :config
+  (setq lsp-clients-clangd-executable "clangd")
+  (setq lsp-clients-clangd-args
+        '())
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection
+                     (lambda () (cons lsp-clients-clangd-executable lsp-clients-clangd-args)))
+    :major-modes '(c-mode c++-mode objc-mode)
+    :server-id 'clangd)))
 
 (provide 'package-manager)

@@ -8,6 +8,8 @@
 
 (setq backward-delete-char-untabify-method nil)
 
+(setq dired-listing-switches "-lah")
+
 (column-number-mode t)
 
 ;; (indent-guide-global-mode)
