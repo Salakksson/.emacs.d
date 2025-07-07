@@ -1,8 +1,7 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (setq custom-safe-themes t)
-(require 'theme) ;; most pressing issue which should be dealt with first
-
+(require 'theme)
 (require 'remove-bullshit)
 (require 'package-manager)
 (require 'qol)
@@ -11,19 +10,11 @@
 
 (require 'modes)
 
-(defun my-vterm ()
+(defun my/vterm ()
   (interactive)
   (vterm)
   (rename-buffer (generate-new-buffer-name "*vterm*"))
 )
-
-(global-set-key (kbd "C-c t") 'my-vterm)
-(global-set-key (kbd "C-c c") 'compile)
-(global-set-key (kbd "C-c r") 'recompile)
-(global-set-key (kbd "C-c d") 'dired-jump)
-(global-set-key (kbd "C-c e") 'eval-buffer)
-
-(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (defun my/confirm-exit ()
 	(interactive)
@@ -32,7 +23,16 @@
 	)
 )
 
+
+(global-set-key (kbd "C-c t") 'my/vterm)
+(global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c r") 'recompile)
+(global-set-key (kbd "C-c d") 'dired-jump)
+(global-set-key (kbd "C-c e") 'eval-buffer)
+(global-set-key (kbd "C-c w") 'whitespace-cleanup)
 (global-set-key (kbd "C-x C-c") 'my/confirm-exit)
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (defun conf-dir ()
   "open .config in dired"
@@ -40,8 +40,7 @@
   (dired "~/dots/.config/")
 )
 
-(defun proj-dir ()
-  "open projects in dired"
+(defun proj-dir ()  "open projects in dired"
   (interactive)
   (dired "/h/code/")
 )
@@ -95,6 +94,9 @@
     (if filename
         (let ((new-filename (concat "/sudo::" filename)))
           (set-visited-file-name new-filename t)
-          (revert-buffer t t t))
-      (message "This buffer is not visiting a file"))))
-
+          (revert-buffer t t t)
+        )
+      (message "This buffer is not visiting a file")
+    )
+  )
+)

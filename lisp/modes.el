@@ -46,6 +46,8 @@
   (yas-activate-extra-mode 'html-mode)
 )
 
+(add-hook 'markdown-mode-hook #'visual-line-mode)
+
 (defun goto-webmode () (setq web-mode t))
 
 (add-hook 'web-mode-hook 'my-web-mode)

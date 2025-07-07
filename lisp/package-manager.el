@@ -13,9 +13,7 @@
   (package-install 'use-package)
 )
 
-(eval-when-compile
-  (require 'use-package)
-)
+(eval-when-compile (require 'use-package))
 
 (use-package magit
   :ensure t
@@ -25,7 +23,8 @@
 
 (use-package multiple-cursors
   :ensure t
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
+  :bind (
+         ("C-S-c C-S-c" . mc/edit-lines)
          ("C->"         . mc/mark-next-like-this)
          ("C-<"         . mc/mark-previous-like-this)
          ("C-c C-<"     . mc/mark-all-like-this)
@@ -79,29 +78,49 @@
 )
 
 (use-package yasnippet
-   :ensure t
-   :init
-   (yas-global-mode 1)
+  :ensure t
+  :init
+  (yas-global-mode 1)
 )
 
 (use-package yasnippet-snippets
-   :ensure t)
+  :ensure t
+)
+
+(use-package csharp-mode
+  :ensure t
+  :mode "\\.cs\\'"
+  :hook (csharp-mode . lsp)
+)
 
 (use-package lsp-mode
   :ensure t
   :defer t
   :hook ((python-mode . lsp)
+         (csharp-mode . lsp)
          (c-mode . lsp)
          (c++-mode . lsp))
   :config
   (setq lsp-clients-clangd-executable "clangd")
-  (setq lsp-clients-clangd-args
-        '())
+  (setq lsp-disabled-clients '(omnisharp))
+  (setq lsp-csharp-server-path "csharp-ls")
   (lsp-register-client
    (make-lsp-client
     :new-connection (lsp-stdio-connection
                      (lambda () (cons lsp-clients-clangd-executable lsp-clients-clangd-args)))
     :major-modes '(c-mode c++-mode objc-mode)
-    :server-id 'clangd)))
+    :server-id 'clangd))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection
+                     (lambda () (list (expand-file-name "csharp-ls"))))
+    :major-modes '(csharp-mode)
+    :server-id 'csharp-ls
+    :activation-fn (lsp-activate-on "csharp")
+    :add-on? t
+    :priority 1
+   )
+  )
+)
 
 (provide 'package-manager)

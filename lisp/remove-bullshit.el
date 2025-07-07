@@ -17,4 +17,8 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; autoformat
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-enable-indentation nil)
+
 (provide 'remove-bullshit)
