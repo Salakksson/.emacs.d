@@ -1,24 +1,26 @@
-;; Auto-generated code
+;; auto-generated code
 (setq custom-file "~/.config/emacs/emacs-custom.el")
 (when (file-exists-p custom-file)
   (load custom-file))
 
-;; Temp files
+;; temp files
 (setq backup-directory-alist '(("." . "~/.cache/emacs/tmp-files/")))
 (setq auto-save-file-name-transforms `((".*" "~/.cache/emacs/tmp-files/" t)))
 (setq lock-file-name-transforms `((".*" "~/.cache/emacs/tmp-files/" t)))
 
-;; Default compile command
+;; default compile command
 (setq compile-command "cd .. && ./build.sh")
 
-;; Default shit
+;; default shit
 (fringe-mode 0)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-;; autoformat
-(setq lsp-enable-on-type-formatting nil)
-(setq lsp-enable-indentation nil)
+;; eglot autoformat
+(setq eglot-ignored-server-capabilities
+      '(:documentFormattingProvider
+        :documentRangeFormattingProvider)
+)
 
 (provide 'remove-bullshit)

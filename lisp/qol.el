@@ -5,16 +5,13 @@
 (setq ring-bell-function 'ignore)
 
 (electric-pair-mode 1)
+(electric-indent-mode 1)
 
 (setq backward-delete-char-untabify-method nil)
 
 (setq dired-listing-switches "-lah")
 
 (column-number-mode t)
-
-;; (indent-guide-global-mode)
-;; (setq indent-guide-recursive t)
-;; (setq indent-guide-delay 0)
 
 (with-eval-after-load 'company
     (define-key company-active-map (kbd "<return>") nil)

@@ -31,7 +31,5 @@
 
 (global-set-key (kbd "M-\\") #'my/delete-tab)
 
-
-
 (provide 'tabs)
 

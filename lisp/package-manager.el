@@ -37,24 +37,7 @@
   :defer t
 )
 
-(use-package company
-  :ensure t
-  :hook (after-init . global-company-mode)
-  :defer t
-)
-
-(use-package flycheck
-  :ensure t
-  :defer t
-  :hook (lsp-mode . flycheck-mode)
-)
-
-(use-package lsp-ui
-  :ensure t
-  :after lsp-mode
-  :defer t
-)
-
+;; smarter M-x
 (use-package smex
   :ensure t
   :commands smex
@@ -71,56 +54,15 @@
   (ido-ubiquitous-mode 1)
 )
 
-(use-package indent-guide
+;; lsp add ons
+(use-package company
   :ensure t
-  :commands indent-guide-mode
-  :defer t
+  :hook (after-init . global-company-mode)
 )
 
-(use-package yasnippet
+(use-package flycheck
   :ensure t
-  :init
-  (yas-global-mode 1)
-)
-
-(use-package yasnippet-snippets
-  :ensure t
-)
-
-(use-package csharp-mode
-  :ensure t
-  :mode "\\.cs\\'"
-  :hook (csharp-mode . lsp)
-)
-
-(use-package lsp-mode
-  :ensure t
-  :defer t
-  :hook ((python-mode . lsp)
-         (csharp-mode . lsp)
-         (c-mode . lsp)
-         (c++-mode . lsp))
-  :config
-  (setq lsp-clients-clangd-executable "clangd")
-  (setq lsp-disabled-clients '(omnisharp))
-  (setq lsp-csharp-server-path "csharp-ls")
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection
-                     (lambda () (cons lsp-clients-clangd-executable lsp-clients-clangd-args)))
-    :major-modes '(c-mode c++-mode objc-mode)
-    :server-id 'clangd))
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection
-                     (lambda () (list (expand-file-name "csharp-ls"))))
-    :major-modes '(csharp-mode)
-    :server-id 'csharp-ls
-    :activation-fn (lsp-activate-on "csharp")
-    :add-on? t
-    :priority 1
-   )
-  )
+  :hook (eglot-managed-mode . flycheck-mode)
 )
 
 (provide 'package-manager)
