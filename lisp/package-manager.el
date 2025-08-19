@@ -31,6 +31,14 @@
   )
 )
 
+(with-eval-after-load 'multiple-cursors
+    (add-hook 'multiple-cursors-mode-hook
+	    (lambda ()
+	      (define-key mc/keymap (kbd "<return>") nil)
+	    )
+    )
+)
+
 (use-package vterm
   :ensure t
   :commands (vterm vterm-other-window)

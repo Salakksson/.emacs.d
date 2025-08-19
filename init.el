@@ -7,7 +7,6 @@
 (require 'qol)
 (require 'tabs)
 (require 'term)
-
 (require 'modes)
 
 (defun my/vterm ()
@@ -17,12 +16,47 @@
 )
 
 (defun my/confirm-exit ()
-	(interactive)
-	(when (y-or-n-p "Really quit Emacs? ")
-	  (save-buffers-kill-terminal)
-	)
+  (interactive)
+  (when (y-or-n-p "Really quit Emacs? ")
+    (save-buffers-kill-terminal)
+  )
 )
 
+(defvar my/rpc-proc nil)
+
+(defun my/start-rpc ()
+  (setq my/rpc-proc
+        (start-process
+         "presence"
+         "*presence*"
+         "python"
+         (concat (getenv "HOME") "/dots/scripts/emacs-rpc.py")
+        )
+  )
+  (set-process-query-on-exit-flag my/rpc-proc nil)
+)
+
+(defun my/send-rpc-update ()
+  (when (and my/rpc-proc (process-live-p my/rpc-proc))
+    (let ((filename (or (buffer-file-name) (buffer-name)))
+          (lineno (line-number-at-pos)))
+      (process-send-string
+       my/rpc-proc
+       (format "%s:%s\n" filename lineno)
+      )
+    )
+  )
+)
+
+(defun my/restart-rpc ()
+  "restart rpc client"
+  (interactive)
+  (kill-process my/rpc-proc nil)
+  (my/start-rpc)
+)
+
+(my/start-rpc)
+(run-at-time 0 1 'my/send-rpc-update)
 
 (global-set-key (kbd "C-c t") 'my/vterm)
 (global-set-key (kbd "C-c c") 'compile)

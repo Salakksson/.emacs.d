@@ -52,7 +52,9 @@
 (add-hook 'csharp-mode-common-hook 'my/csharp-mode)
 (add-hook 'python-mode-hook 'my/python-mode)
 (add-hook 'sh-mode-hook 'my/shell-mode)
+(add-hook 'lisp-mode-hook 'my/lisp-mode)
 (add-hook 'markdown-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook #'visual-line-mode)
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
