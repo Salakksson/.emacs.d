@@ -13,9 +13,12 @@
 
 (use-package cc-mode
   :ensure nil
-  :mode ("\\.c\\'" . my/c-mode)
+  :mode "\\.c\\'"
   :hook ((c-mode c++-mode) . my/c-mode)
-)
+  )
+
+(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.[b]\\'" . c-mode))
 
 ;; C#
 (defun my/csharp-mode ()
@@ -40,8 +43,9 @@
 ;; Shell
 (defun my/shell-mode ()
   (setq tab-width 8)
-  (setq indent-tabs-mode t)
   (setq sh-basic-offset 8)
+  (setq sh-indentation 8)
+  (setq indent-tabs-mode t)
 )
 
 (defun my/lisp-mode ()
@@ -68,5 +72,9 @@
 )
 
 (add-hook 'eglot-managed-mode-hook 'my/lsp-mode)
+
+(setq org-src-preserve-indentation t)
+(setq org-edit-src-content-indentation 0)
+(setq org-src-tab-acts-natively t)
 
 (provide 'modes)

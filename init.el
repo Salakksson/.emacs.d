@@ -8,6 +8,7 @@
 (require 'tabs)
 (require 'term)
 (require 'modes)
+(require 'pamde-mode)
 
 (defun my/vterm ()
   (interactive)
