@@ -11,9 +11,17 @@
 
 ;; Font
 (set-face-attribute 'default nil
-	:family "Victor Mono Nerd Font"
-	:height 180
-	:weight 'semi-bold)
+	:family "Agave Nerd Font"
+	:height 220
+	:weight 'regular
+)
+
+;; This font is larger (?) so font size is smaller to make half a screen 80 chars²
+;; (set-face-attribute 'default nil
+;;	:family "Victor Mono Nerd Font"
+;;	:height 200
+;;	:weight 'regular
+;; )
 
 ;; Cursor
 (setq-default cursor-type 'bar)
