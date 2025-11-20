@@ -12,7 +12,7 @@
 ;; Font
 (set-face-attribute 'default nil
 	:family "Agave Nerd Font"
-	:height 220
+	:height 200
 	:weight 'regular
 )
 

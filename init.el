@@ -80,6 +80,16 @@
   (dired "/h/code/")
 )
 
+(defun git-dir ()  "open git dir in dired"
+  (interactive)
+  (dired "/h/git/")
+)
+
+(defun scripts-dir ()  "open scripts dir in dired"
+  (interactive)
+  (dired "~/dots/scripts/")
+)
+
 (defun git-dir ()
   "open git dir in dired"
   (interactive)
