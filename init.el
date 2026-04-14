@@ -8,7 +8,10 @@
 (require 'tabs)
 (require 'term)
 (require 'modes)
-(require 'pamde-mode)
+
+(setq server-use-tcp t)
+(setq server-host "0.0.0.0")
+(setq server-port 9999)
 
 (defun my/vterm ()
   (interactive)
@@ -56,10 +59,17 @@
   (my/start-rpc)
 )
 
+(defun my/etags ()
+  "run etags"
+  (interactive)
+  (shell-command-to-string "etags $(find . -type f -name \"*.[ch]\")")
+)
+
 (my/start-rpc)
 (run-at-time 0 1 'my/send-rpc-update)
 
-(global-set-key (kbd "C-c t") 'my/vterm)
+(global-set-key (kbd "C-c t") 'my/etags)
+(global-set-key (kbd "C-c s") 'helm-etags-select)
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c r") 'recompile)
 (global-set-key (kbd "C-c d") 'dired-jump)
@@ -68,6 +78,8 @@
 (global-set-key (kbd "C-x C-c") 'my/confirm-exit)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; MISC FUNCTIONS
 
 (defun conf-dir ()
   "open .config in dired"

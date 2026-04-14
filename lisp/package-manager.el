@@ -21,6 +21,10 @@
   :defer t
 )
 
+(use-package helm
+  :ensure t
+)
+
 (use-package multiple-cursors
   :ensure t
   :bind (
@@ -54,6 +58,7 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 )
 
+;; smarter C-c C-f
 (use-package ido-completing-read+
   :ensure t
   :init

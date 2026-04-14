@@ -46,12 +46,20 @@
     '((t :weight bold :height 1.0 :underline nil))
     "Face for === Heading 3, takes ~1 line.")
 
+(defface typst-heading-4-face
+    '((t :weight bold :height 1.0 :underline nil))
+    "Face for === Heading 3, takes ~1 line.")
+
 (defun my-typst-font-lock-setup ()
     (font-lock-add-keywords
         nil
-        '(("^\\(= .*\\)$" 1 'typst-heading-1-face prepend)
+        '(
+          ("^\\(= .*\\)$" 1 'typst-heading-1-face prepend)
           ("^\\(== .*\\)$" 1 'typst-heading-2-face prepend)
-          ("^\\(=== .*\\)$" 1 'typst-heading-3-face prepend))))
+          ("^\\(=== .*\\)$" 1 'typst-heading-3-face prepend)
+         )
+    )
+)
 
 (add-hook 'typst-mode-hook 'my-typst-font-lock-setup)
 
@@ -88,14 +96,12 @@
   :hook (csharp-mode . eglot-ensure)
 )
 
-;; Python
 (defun my/python-mode ()
   (setq python-indent-offset 8)
   (setq indent-tabs-mode t)
   (setq tab-width 8)
 )
 
-;; Shell
 (defun my/shell-mode ()
   (setq tab-width 8)
   (setq sh-basic-offset 8)
@@ -103,14 +109,35 @@
   (setq indent-tabs-mode t)
 )
 
-(defun my/lisp-mode ()
-  (setq indent-tabs-mode f)
+(defun my/tcl-mode ()
+  (setq tab-width 8)
+  (setq tcl-indent-level 8)
+  (setq indent-tabs-mode t)
 )
 
+(defun my/lua-mode ()
+  (setq tab-width 8)
+  (setq lua-indent-level 8)
+  (setq indent-tabs-mode t)
+)
+
+(defun my/lisp-mode ()
+  (setq indent-tabs-mode f)
+  (setq elastic-tabs)
+)
+
+(defun my/rust-mode ()
+  (setq indent-tabs-mode t)
+  (setq tab-width 8)
+)
+
+(add-hook 'rust-mode-hook 'my/rust-mode)
 (add-hook 'c-mode-common-hook 'my/c-mode)
 (add-hook 'csharp-mode-common-hook 'my/csharp-mode)
 (add-hook 'python-mode-hook 'my/python-mode)
 (add-hook 'sh-mode-hook 'my/shell-mode)
+(add-hook 'tcl-mode-hook 'my/tcl-mode)
+(add-hook 'lua-mode-hook 'my/lua-mode)
 (add-hook 'lisp-mode-hook 'my/lisp-mode)
 (add-hook 'typst-mode-hook #'visual-line-mode)
 (add-hook 'markdown-mode-hook #'visual-line-mode)
