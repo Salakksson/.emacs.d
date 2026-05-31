@@ -83,7 +83,27 @@
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.[b]\\'" . c-mode))
 
-;; C#
+(add-to-list 'load-path "/usr/share/emacs/site-lisp")
+(require 'lilypond-mode)
+(add-to-list 'auto-mode-alist '("\\.ly\\'" . LilyPond-mode))
+
+(defun my/lilypond-compile ()
+  (when (eq major-mode 'lilypond-mode)
+    (if (call-process "lilypond" nil "*lilypond*" t (buffer-file-name))
+        (message "fail")
+        (message "success")
+    )
+  )
+)
+
+(defun my/lilypond-mode ()
+  (setq lilypond-indent-level 8)
+  (setq indent-tabs-mode t)
+  (setq tab-width 8)
+)
+
+(add-hook 'after-save-hook #'my/lilypond-compile)
+
 (defun my/csharp-mode ()
   (setq c-basic-offset 8)
   (setq indent-tabs-mode t)
@@ -94,6 +114,24 @@
   :ensure t
   :mode "\\.cs\\'"
   :hook (csharp-mode . eglot-ensure)
+)
+
+(defun my/nix-mode ()
+  (setq indent-tabs-mode t)
+  (setq tab-width 4)
+)
+
+(use-package nix-mode
+  :ensure t
+  :mode "\\.nix\\'"
+)
+
+(defun my/web-mode ()
+  (setq web-mode-markup-indent-offset 8)
+  (setq web-mode-css-indent-offset 8)
+  (setq web-mode-code-indent-offset 8)
+  (setq indent-tabs-mode t)
+  (setq tab-width 8)
 )
 
 (defun my/python-mode ()
@@ -134,6 +172,8 @@
 (add-hook 'rust-mode-hook 'my/rust-mode)
 (add-hook 'c-mode-common-hook 'my/c-mode)
 (add-hook 'csharp-mode-common-hook 'my/csharp-mode)
+(add-hook 'web-mode-hook 'my/web-mode)
+(add-hook 'nix-mode-hook 'my/nix-mode)
 (add-hook 'python-mode-hook 'my/python-mode)
 (add-hook 'sh-mode-hook 'my/shell-mode)
 (add-hook 'tcl-mode-hook 'my/tcl-mode)
